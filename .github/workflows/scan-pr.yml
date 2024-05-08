@@ -1,7 +1,9 @@
-name: Scan Pull Requests
+name: Pull Request Validation
+
 on:
- pull_request:
-    types: [opened, synchronize]
+  pull_request:
+    branches:
+      - main
 
 jobs:
   scan_pull_request:
@@ -14,6 +16,11 @@ jobs:
       - name: Validate Pull Request
         run: |
           # Get the list of changed files in the pull request
+          if [ "$(git rev-parse HEAD)" = "$(git rev-list --max-parents=0 HEAD)" ]; then
+            echo "This is the initial commit. No validation checks needed."
+            exit 0
+          fi
+
           changed_files=$(git diff --name-only HEAD^)
 
           # Perform validation checks on each changed file
