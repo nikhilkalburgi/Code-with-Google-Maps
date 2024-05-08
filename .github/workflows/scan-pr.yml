@@ -15,4 +15,5 @@ jobs:
         with:
           node-version: '20.x'
       - run: npm install --save-dev snyk
-      - run: npx snyk test
+      - run: synk auth
+      - run: snyk test
