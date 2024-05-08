@@ -1,0 +1,17 @@
+name: Scan Pull Requests
+on:
+ pull_request:
+    types: [opened, synchronize]
+jobs:
+          scan:
+            runs-on: ubuntu-latest
+
+            steps:
+              - name: Checkout code
+                uses: actions/checkout@v2
+
+              - name: Run scanning tool
+              - uses: actions/setup-node@v4
+                # Replace this with the command to run your scanning tool
+              - run: npm install --save-dev snyk
+              - run: npx snyk test
