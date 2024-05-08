@@ -1,17 +1,22 @@
-name: Scan Pull Requests
+name: Pull Request Validation
+
 on:
- pull_request:
-    types: [opened, synchronize]
+  pull_request:
+    branches:
+      - main
+
 jobs:
-          scan:
-            runs-on: ubuntu-latest
+  update:
+    runs-on: ubuntu-latest
 
-            steps:
-              - name: Checkout code
-                uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-              - name: Run scanning tool
-              - uses: actions/setup-node@v4
-                # Replace this with the command to run your scanning tool
-              - run: npm install --save-dev snyk
-              - run: npx snyk test
+      - name: Update dependencies
+        run: |
+          # Replace this with the command to update dependencies
+          npm install -g npm-check-updates
+          ncu -u
+          npm install
+          git commit -am "chore: Update dependencies" && git push

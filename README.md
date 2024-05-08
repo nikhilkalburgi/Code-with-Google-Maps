@@ -1,6 +1,6 @@
-# Code-with-Google-Maps-2023 - Hack2skill
+# Code-with-Google-Maps-2023 - Hack 2 skill
 
-Welcome to the official repository for the Code-with-Google-Maps-2023 organized by Hack2skill!
+Welcome to the official repository for the Code-with-Google-Maps-2023 organized by Hack 2 skill!
 
 #### Team Name - New Nourish
 #### Problem Statement - A User friendly platform for food waste management and addressing the reduction of under-nourishment
