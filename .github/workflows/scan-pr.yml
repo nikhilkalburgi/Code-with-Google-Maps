@@ -6,30 +6,17 @@ on:
       - main
 
 jobs:
-  scan_pull_request:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Validate Pull Request
+      - name: Update dependencies
         run: |
-          # Get the list of changed files in the pull request
-          if [ "$(git rev-parse HEAD)" = "$(git rev-list --max-parents=0 HEAD)" ]; then
-            echo "This is the initial commit. No validation checks needed."
-            exit 0
-          fi
-
-          changed_files=$(git diff --name-only HEAD^)
-
-          # Perform validation checks on each changed file
-          for file in $changed_files; do
-            # Check if the file contains any forbidden patterns
-            if grep -q "forbidden_pattern" $file; then
-              echo "Error: File $file contains forbidden pattern."
-              exit 1
-            fi
-
-            # Add more custom validation checks as needed...
-          done
+          # Replace this with the command to update dependencies
+          npm install -g npm-check-updates
+          ncu -u
+          npm install
+          git commit -am "chore: Update dependencies" && git push
